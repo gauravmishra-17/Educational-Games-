@@ -27,8 +27,9 @@ public class User {
     @NotBlank(message = "Last name is required")
     private String lastname;
 
-    @Email
+
     @NotBlank(message = "Email is required")
+    @Email(message = "{email.not.valid}")
     private String email;
 
     @Column(nullable = false)

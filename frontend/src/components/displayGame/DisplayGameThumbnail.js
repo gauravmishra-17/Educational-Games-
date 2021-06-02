@@ -22,14 +22,14 @@ class DisplayGameThumbnail extends Component {
         return ( returnedArray.map(game =>
                 <div className="col-sm-12 col-sm-6 col-md-3" key={game.id}>
                     <div className="thumbnail games">
-                        <div className={"row"}>
+                        {/*<div className={"row"}>*/}
                             <a href={game.gameUrl}>
                                 <div className={"picTitle"}>{game.title}</div>
                                         <img className={"imageStyle"} src={game.pictureUrl}
                                              alt={game.title} title={game.description}/>
                             </a>
                         </div>
-                    </div>
+                    {/*</div>*/}
                 </div>
             )
         )
