@@ -20,6 +20,8 @@ public class Role {
     @Column(nullable = false)
     private String name;
 
+    // region OneToMany
     @OneToMany(targetEntity = User.class, mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<User> users;
+    // endregion OneToMany
 }
