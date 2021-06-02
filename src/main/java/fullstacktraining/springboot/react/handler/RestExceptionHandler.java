@@ -4,12 +4,14 @@ import fullstacktraining.springboot.react.exception.BadRequestException;
 import fullstacktraining.springboot.react.exception.BadRequestExceptionDetails;
 import fullstacktraining.springboot.react.exception.ExceptionDetails;
 import fullstacktraining.springboot.react.exception.ValidationExceptionDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -18,6 +20,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ControllerAdvice
+@Slf4j
 public class RestExceptionHandler  extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
