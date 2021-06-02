@@ -11,7 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@Table(name = "employees")
 @Builder
 public class Game {
 
