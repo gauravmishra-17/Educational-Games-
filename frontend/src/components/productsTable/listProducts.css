@@ -1,0 +1,95 @@
+/*.table tr:nth-child(odd){*/
+/*    background-color: #e2bc76*/
+/*}*/
+/*.table tr:nth-child(even){*/
+/*    background-color: #f6d89f*/
+/*}*/
+.addGame{
+    margin-bottom: 10px;
+}
+/*.table{*/
+/*    !*border-collapse: collapse;*!*/
+/*    !*border-spacing: 0;*!*/
+/*    width: 100%;*/
+/*    border-radius:3px;*/
+/*    box-shadow:0px 0px 10px 0px;*/
+/*    !*padding:10px;*!*/
+/*    border: 2px solid #0e0e0e;*/
+/*    background-color: #e2bc76;*/
+
+/*}*/
+
+.displayGamesList{
+    /*padding-right: 0;*/
+    overflow-x: auto;
+    width: 100%;
+    border-radius:3px;
+    box-shadow:0px 0px 10px 0px;
+    /*padding:10px;*/
+    border: 2px solid #0e0e0e;
+    background-color: #e2bc76;
+    margin-bottom: 1em;
+
+}
+.table th, td {
+    text-align: left;
+}
+
+@media (max-width:998px) {
+    table, tr, td, tbody, td p table div, table table {
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: both;
+        text-align: center;
+        margin:0;
+    }
+
+}
+
+@media (max-width:768px) {
+    table, tr, td, tbody, td p table div, table table {
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: both;
+        text-align: center;
+        margin:0;
+    }
+
+}
+@media (max-width:560px) {
+    table, tr, td, tbody, td p table div, table table {
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: both;
+        text-align: center;
+        margin:0;
+        font-size:1.5vw;
+    }
+    .addGame, .bt{
+        float: inside;
+        margin: 5px;
+        font-size:2vw;
+    }
+ }
+@media (max-width:360px) {
+    table, tr, td, tbody, td p table div, table table {
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: both;
+        text-align: center;
+        margin:0;
+        font-size:2vw;
+    }
+    .addGame, .bt{
+        float: inside;
+        margin: 5px;
+        font-size:1.5vw;
+    }
+
+}
+
+

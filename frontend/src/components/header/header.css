@@ -1,0 +1,143 @@
+.Header {
+    position: sticky;
+    top: 0; /* Stick it to the top */
+    /*max-height: 12.5rem;*/
+    width: 103%;
+    /*margin-bottom: 7.6rem;*/
+
+    display: grid;
+    grid-template-areas: "logo nav";
+
+    /* Cosmetics */
+    background-color: #f3edbb;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+    z-index: 5;
+    padding-left: 15px;
+}
+.Logo {
+    grid-area: logo;
+    width: auto;
+    height: auto;
+   }
+
+.Nav{
+    grid-area: nav;
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    align-items: center;
+    justify-items: center;
+    /*max-height: 12.5rem;*/
+}
+
+.Nav a {
+    color: #ec4c4c;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.Nav a:hover {
+    /*transform: scale(1.1);*/
+    transform: skewY(14deg);
+    color: white;
+}
+
+.Nav button {
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 600;
+    background-color: #ef4646;
+    /*box-shadow: 0px 5px 0px 0px rgba(255, 0, 0, 0.25);*/
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 70ms;
+}
+
+.Nav button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 0 rgba(255, 0, 0, 0.25);
+}
+
+.Burger {
+    display: none;
+    grid-area: burger;
+    margin: 0 20px 0 0;
+    padding: 0;
+    justify-self: end;
+    font-size: 40px;
+    border: none;
+    background: none;
+    outline: none;
+    transition: 0.1s;
+}
+
+.Burger:active {
+    transform: scale(1.2);
+}
+
+@media (max-width: 700px) {
+    .Header {
+        grid-template-areas: "logo burger" "nav nav";
+        height: auto;
+        background-color: #f3edbb;
+        /*position: fixed;*/
+        /*top: 0;*/
+        /*width: 100%;*/
+    }
+    .Nav {
+        grid-template-rows: repeat(4, auto);
+        grid-template-columns: none;
+        grid-row-gap: 20px;
+
+        padding: 30px 0 30px;
+        background: #b9e8b1;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        z-index: 5;
+
+    }
+    .Burger {
+        display: inline;
+        height: 50px;
+        padding-top: 15px;
+    }
+    .Nav a:hover{
+        color: white;
+    }
+    .myLogo{
+      position: sticky;
+    }
+}
+
+.NavAnimation-enter {
+    opacity: 0;
+    transform: scale(0.5);
+
+}
+
+.NavAnimation-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 350ms, transform 350ms;
+}
+.NavAnimation-exit {
+    opacity: 1;
+}
+.NavAnimation-exit-active {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 350ms, transform 350ms;
+}
+
+.myLogo{
+    background-image: url("../logoDir/eduGamesLogo.png");
+    height: 20rem;
+    width: 20rem;
+    /*margin-left: 20px;*/
+    background-repeat: no-repeat;
+}
+

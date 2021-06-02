@@ -1,0 +1,71 @@
+.games{
+    background-color: rgba(227, 207, 164, 0.85);
+    /*border: 1px solid #6c757d;*/
+    border-radius: .75rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.bt{
+    margin-left: 5px;
+}
+.picTitle{
+    font-family: "Apple Color Emoji", "Font Awesome 5 Free", "serif";
+    padding-top: 5px;
+    padding-bottom: 2px;
+    position: relative;
+    margin-bottom: 2%;
+    text-align: center;
+    /*text-decoration-color: #000000 ;*/
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 100%;
+}
+.imageStyle{
+    border-radius: .75rem;
+}
+
+@media (max-width: 700px){
+    .picTitle{
+        font-size: 75%;
+    }
+}
+
+@media (max-width: 560px){
+    .td{
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: both;
+        text-align: center;
+        margin:0;
+        font-size:3vw;
+    }
+    .bt{
+        float: inside;
+        margin: 5px;
+        font-size:3vw;
+    }
+}
+
+@media (max-width: 360px){
+    .bt{
+        float: inside;
+        margin: 5px;
+        font-size:3vw;
+    }
+    .td{
+        display: block;
+        width: 100% !important;
+        float: left;
+        clear: both;
+        text-align: center;
+        margin:0;
+        font-size:3vw;
+    }
+}
+
+
+
+
+
+

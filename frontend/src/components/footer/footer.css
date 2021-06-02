@@ -1,0 +1,56 @@
+.footer{
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #d0d0c3;
+    /*z-index: 0;*/
+    margin-bottom: 3em;
+    color: #2b2b2b;
+    margin-top: 10rem;
+}
+
+.links {
+    color: #ec4c4c;
+    font-family: "Andale Mono", "monospace", "serif";
+    font-size: 1.5rem;
+    /*font-style: italic;*/
+   }
+
+.unOrderedList{
+    padding-left: 0;
+}
+
+.quote{
+    font-family: "Andale Mono", "monospace", "serif";
+    font-size: 1.5rem;
+    color: #ec4c4c;
+}
+
+.title {
+    color: #ec4c4c;
+    font-family: "Apple Color Emoji", "Font Awesome\ 5 Free", "serif";
+    font-size: 2.3rem;
+    font-style: italic;
+    font-weight: bold;
+}
+a:hover{
+    color: #ec4c4c;
+    font-weight: bold;
+}
+.footer{
+    background-color: #f3edbb;
+}
+
+@media (max-width: 700px){
+    .links{
+        font-size: 1.3rem;
+    }
+}
+
+.footer-copyright{
+    color: #ec4c4c;
+}
+
+.webmaster{
+    color: #ec4c4c;
+    font-weight: bold;
+}
