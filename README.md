@@ -1,2 +1,1 @@
-# springboot-backend
-# fullstacktarinning
+# fullstacktrainning
