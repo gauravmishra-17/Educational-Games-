@@ -1,13 +1,14 @@
 package fullstacktraining.springboot.react.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -19,26 +20,38 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
-    @NotBlank(message = "First name is required")
+    @NotNull
+    @NotEmpty(message = "Firstname cannot be empty")
+    @Schema(description = "Name of website's user", example = "Eduard", required = true)
     private String firstname;
 
     @Column(nullable = false)
-    @NotBlank(message = "Last name is required")
+    @NotNull
+    @NotEmpty(message = "Lastname cannot be empty")
+    @Schema(description = "Lastname of website's user", example = "Eduard", required = true)
     private String lastname;
 
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "{email.not.valid}")
+    @Column(nullable = false)
+    @NotNull
+    @Email(message = "Please enter a valid e-mail address")
+    @Schema(description = "Email of the user", example = "user@mail.com", required = true)
     private String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "Username is required")
+    @NotNull
+    @NotEmpty(message = "Username cannot be empty")
+    @Schema(description = "Customized description of username", example = "eduard@someone.com", required = true)
     private String username;
 
     @Column(nullable = false)
-
+    @NotNull
+    @NotEmpty(message = "Password cannot be empty")
+    @Schema(description = "Password of a user to have access to books", example = "myPassword", required = true)
     private String password;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
