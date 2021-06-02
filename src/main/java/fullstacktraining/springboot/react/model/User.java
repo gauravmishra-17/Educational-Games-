@@ -54,6 +54,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
+    @Schema(description = "Role the user has to access the games platform", example = "Admin or User", required = true)
     private Role role;
 
 }

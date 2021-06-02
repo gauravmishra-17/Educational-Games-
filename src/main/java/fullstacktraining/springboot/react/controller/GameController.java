@@ -41,7 +41,7 @@ public class GameController {
         return ResponseEntity.ok(gameService.listAllNonPageable());
     }
 
-     @Operation(summary = "Find game by id")
+    @Operation(summary = "Find game by id")
     @GetMapping(path = "{id}")
     public ResponseEntity<Game> findById(@PathVariable long id) {
         return ResponseEntity.ok(gameService.findByIdOrThrowBadRequestException(id));
@@ -74,7 +74,7 @@ public class GameController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-     @Operation(summary = "Update Game details")
+    @Operation(summary = "Update Game details")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "resource updated successfully"),
             @ApiResponse(responseCode = "403", description = "Forbidden: Authentication failure")
