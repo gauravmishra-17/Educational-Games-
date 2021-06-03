@@ -7,18 +7,23 @@ class Contact extends Component {
     constructor() {
         super()
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.nameChanged = this.nameChanged.bind(this)
+        this.firstNameChanged = this.firstNameChanged.bind(this)
+        this.lastNameChanged = this.lastNameChanged.bind(this)
         this.emailChanged = this.emailChanged.bind(this)
         this.messageChanged = this.messageChanged.bind(this)
         this.state = {
+            firstName: '',
+            lastName: '',
             email: '',
-            name: '',
             message: '',
             sent: false
         }
     }
-    nameChanged(e) {
-        this.setState({name: e.target.value})
+    firstNameChanged(e) {
+        this.setState({firstname: e.target.value})
+    }
+    lastNameChanged(e) {
+        this.setState({lastname: e.target.value})
     }
     messageChanged(e) {
         this.setState({message: e.target.value})
@@ -29,7 +34,7 @@ class Contact extends Component {
     async handleSubmit(e) {
         e.preventDefault()
         try {
-            const res = await axios('/contact', {
+            const res = await axios('/contacts', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -57,14 +62,21 @@ class Contact extends Component {
                 <div>
                     <p>
                         <label className={"field"} htmlFor="name">Name:</label><br/>
-                        <input name='name' type='text' value={this.state.name} onChange={this.nameChanged}/></p>
+                        <input name='name' type='text' value={this.state.firstName} onChange={this.firstNameChanged}/>
+                    </p>
+                    <p>
+                        <label className={"field"} htmlFor="name">Name:</label><br/>
+                        <input name='name' type='text' value={this.state.lastName} onChange={this.lastNameChanged}/>
+                    </p>
                     <p>
                         <label className={"field"} htmlFor="email">Email:</label><br/>
-                        <input name='email' type='text' value={this.state.email} onChange={this.emailChanged}/></p>
+                        <input name='email' type='text' value={this.state.email} onChange={this.emailChanged}/>
+                    </p>
                     <p>
                         <label className={"field"} htmlFor="message">Message:</label><br/>
                         <textarea name='message' cols={'140'} rows={'10'} type="text" value={this.state.message} onChange={this.messageChanged}/></p>
-                    <p><input className={"btn btn-danger submit"} type='submit' value='Send'/></p>
+                    <p><input className={"btn btn-danger submit"} type='submit' value='Send'/>
+                    </p>
                 </div>
             </form>
         </div>)
