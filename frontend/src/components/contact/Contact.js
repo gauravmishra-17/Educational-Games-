@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import "./contact.css"
+
 
 class Contact extends Component {
     constructor() {
@@ -44,21 +46,26 @@ class Contact extends Component {
     }
     render() {
         return (<div>
-            <h1>Contact</h1>
+            <div className={"header"}>
+                <h1 className={"title"}>Sent us a message! </h1>
+            </div>
+
             <p className={this.state.sent
                 ? ''
-                : 'hide-text'}>Thank you for your message.</p>
+                : 'hide-text'}><div className={"thanks"}>Thank you for your message.</div></p>
             <form onSubmit={this.handleSubmit} id='form'>
-                <p>
-                    <label htmlFor="name">Name:</label><br/>
-                    <input name='name' type='text' value={this.state.name} onChange={this.nameChanged}/></p>
-                <p>
-                    <label htmlFor="email">Email:</label><br/>
-                    <input name='email' type='text' value={this.state.email} onChange={this.emailChanged}/></p>
-                <p>
-                    <label htmlFor="message">Message:</label><br/>
-                    <textarea name='message' cols={'140'} rows={'10'} type="text" value={this.state.message} onChange={this.messageChanged}/></p>
-                <p><input className={"btn-warning"} type='submit' value='Send'/></p>
+                <div>
+                    <p>
+                        <label className={"field"} htmlFor="name">Name:</label><br/>
+                        <input name='name' type='text' value={this.state.name} onChange={this.nameChanged}/></p>
+                    <p>
+                        <label className={"field"} htmlFor="email">Email:</label><br/>
+                        <input name='email' type='text' value={this.state.email} onChange={this.emailChanged}/></p>
+                    <p>
+                        <label className={"field"} htmlFor="message">Message:</label><br/>
+                        <textarea name='message' cols={'140'} rows={'10'} type="text" value={this.state.message} onChange={this.messageChanged}/></p>
+                    <p><input className={"btn btn-danger submit"} type='submit' value='Send'/></p>
+                </div>
             </form>
         </div>)
     }
