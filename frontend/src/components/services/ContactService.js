@@ -14,7 +14,7 @@ class ContactService{
     }
 
     getGameByEmail(email){
-        return axios.get(GAME_API_BASE_URL + '/' + email);
+        return axios.get(GAME_API_BASE_URL + '/admin/' + email);
     }
 }
 export default new ContactService();

@@ -29,7 +29,7 @@ public class ContactController {
     }
 
     @Operation(summary = "Get message filtered by email")
-    @GetMapping(path = "/find/{email}")
+    @GetMapping(path = "/admin/{email}")
     public ResponseEntity<Contact> findByEmail(@RequestParam(value = "email") @PathVariable String email) {
         return ResponseEntity.ok(contactService.findByEmail(email));
     }
