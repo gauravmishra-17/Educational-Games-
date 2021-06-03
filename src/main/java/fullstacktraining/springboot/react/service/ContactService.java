@@ -24,6 +24,6 @@ public class ContactService {
     }
 
     public Contact findByEmail(String email){
-        return  contactRepositoy.findByEmail(email);
+        return contactRepositoy.findByEmail(email);
     }
 }
