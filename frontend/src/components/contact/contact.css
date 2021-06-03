@@ -1,3 +1,7 @@
+.container
+{
+
+}
 .row{
     margin-left: 0;
     width: 100%;
@@ -26,7 +30,6 @@
     cursor: pointer;
     transition: 70ms;
     text-decoration: none;
-
 }
 
 

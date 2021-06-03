@@ -37,10 +37,9 @@
   }
 }
 
-/*.games{*/
-/*  background-color: #d2c578;*/
-/*  width: 100%;*/
-/*}*/
+.container.games{
+  margin-top: 6rem;
+}
 
 
 /*.head{*/

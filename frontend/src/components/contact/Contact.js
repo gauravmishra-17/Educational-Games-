@@ -45,14 +45,14 @@ class Contact extends Component {
         }
     }
     render() {
-        return (<div>
+        return (<div className={"container"}>
             <div className={"header"}>
                 <h1 className={"title"}>Sent us a message! </h1>
             </div>
-
+            <div className={"thanks"}>
             <p className={this.state.sent
                 ? ''
-                : 'hide-text'}><div className={"thanks"}>Thank you for your message.</div></p>
+                : 'hide-text'}>Thank you for your message.</p></div>
             <form onSubmit={this.handleSubmit} id='form'>
                 <div>
                     <p>
