@@ -57,8 +57,8 @@ class Contact extends Component {
                     <input name='email' type='text' value={this.state.email} onChange={this.emailChanged}/></p>
                 <p>
                     <label htmlFor="message">Message:</label><br/>
-                    <textarea name='message' cols={'40'} rows={'10'} type="text" value={this.state.message} onChange={this.messageChanged}/></p>
-                <p><input type='submit' value='Send'/></p>
+                    <textarea name='message' cols={'140'} rows={'10'} type="text" value={this.state.message} onChange={this.messageChanged}/></p>
+                <p><input className={"btn-warning"} type='submit' value='Send'/></p>
             </form>
         </div>)
     }

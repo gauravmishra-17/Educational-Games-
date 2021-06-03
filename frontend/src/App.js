@@ -8,6 +8,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import AddGame from "./components/addGame/AddGame";
 import ListProducts from "./components/productsTable/ListProducts";
+import Contact from "./components/contact/Contact";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                             <Route path = "/list-games" component = {ListProducts}/>
                             <Route path = "/add-game/:id" component = {AddGame}/>
                             <Route path = "/view-game/:id" component = {ViewGameDetails}/>
+                            <Route path = "/contact" component = {Contact}/>
                         </div>
                   <Footer />
               </div>
