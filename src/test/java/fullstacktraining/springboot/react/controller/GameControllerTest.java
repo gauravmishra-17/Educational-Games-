@@ -122,17 +122,17 @@ class GameControllerTest {
         Assertions.assertThat(responseEntity.getBody()).isNull();
     }
 
-    @Test
-    @DisplayName("update save updated game when succesful")
-    public void update_SaveUpdatedGame_WhenSuccessful(){
-        Long id = GameCreator.createValidGame().getId();
-        ResponseEntity<Game> responseEntity = gameController.updateGame(id,GameCreator.createValidGame());
-
-        Assertions.assertThat(responseEntity).isNotNull();
-
-        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-
-        Assertions.assertThat(responseEntity.getBody()).isNull();
-    }
+//    @Test
+//    @DisplayName("update save updated game when succesful")
+//    public void update_SaveUpdatedGame_WhenSuccessful(){
+//        Long id = GameCreator.createValidGame().getId();
+//        ResponseEntity<Game> responseEntity = gameController.updateGame(id,GameCreator.createValidGame());
+//
+//        Assertions.assertThat(responseEntity).isNotNull();
+//
+//        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+//
+//        Assertions.assertThat(responseEntity.getBody()).isNull();
+//    }
 
 }

@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 public class Contact {
 
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class UserPostRequestBody {
 
+    private String email;
     private String firstname;
     private String lastname;
-    private String email;
     private String username;
     private String password;
-   // private Role role;
+    // private Role role;
 }

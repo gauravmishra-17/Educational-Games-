@@ -42,7 +42,8 @@ class ListProducts extends Component {
             <div>
                 <h2 className={"text-center title"}>Games List</h2>
                 <div className={"row"}>
-                    <button className={"btn btn-primary addGame"} onClick={this.addGame}> Add Game </button>
+                    <button className={"btn btn-primary addGame"} 
+                    onClick={this.addGame}> Add Game </button>
                 </div>
                 <div className={"container displayGamesList"}>
                     <div className={"table-responsive-sm table-responsive-md w-auto"}>
