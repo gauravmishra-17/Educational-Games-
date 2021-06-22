@@ -1,33 +1,70 @@
 package fullstacktraining.springboot.react.controller;
 
 
-import fullstacktraining.springboot.react.model.Game;
-import fullstacktraining.springboot.react.model.User;
+import fullstacktraining.springboot.react.config.security.SecurityConfig;
+import fullstacktraining.springboot.react.model.*;
 import fullstacktraining.springboot.react.service.UserService;
+import fullstacktraining.springboot.react.utils.JwtUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@Import(SecurityConfig.class)
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    JwtUtil jwtUtil;
 
     @PostMapping(path = "/register")
-    public ResponseEntity<User> save(@RequestBody @Valid User user) {
-        return ResponseEntity.ok(userService.save(user));
+    public ResponseEntity<?> save(@RequestBody @Valid User user) {
+        User userByUsername = userService.findUserByUsername(user.getUsername());
+        User userByEmail = userService.findUserByEmail(user.getEmail());
+        if (userByUsername != null || userByEmail != null) {
+            Message message = new Message();
+            message.setMsg("username already exists");
+            return ResponseEntity.ok(message);
+        } else
+            return ResponseEntity.ok(userService.save(user));
+
+    }
+
+    @PostMapping(path = "/authenticate")
+    public ResponseEntity<?> authenticate(@RequestBody @Valid AuthenticationRequest authenticationRequest) throws Exception {
+        try {
+            authenticationManager.
+                    authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    authenticationRequest.getUsername(),
+                                    authenticationRequest.getPassword()));
+        }  catch (NullPointerException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUsername());
+
+        String jwtToken = jwtUtil.generateToken(userDetails);
+        String message = "Jwt generated";
+        return ResponseEntity.ok(new AuthenticationResponse(jwtToken, message));
     }
 
 

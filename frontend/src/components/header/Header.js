@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import "./header.css";
 import { CSSTransition } from "react-transition-group";
 
-export default function Header() {
+export default function Header({ history, location }) {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isLoggedin, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 700px)");
     mediaQuery.addListener(handleMediaQueryChange);
     handleMediaQueryChange(mediaQuery);
-
+    authCheck();
     return () => {
       mediaQuery.removeListener(handleMediaQueryChange);
     };
-  }, []);
+  }, [isLoggedin]);
 
   const handleMediaQueryChange = (mediaQuery) => {
     if (mediaQuery.matches) {
@@ -28,6 +29,19 @@ export default function Header() {
     setNavVisibility(!isNavVisible);
   };
 
+  const authCheck = () => {
+    if (localStorage.getItem("JwtToken") !== null) {
+      setIsLoggedIn(true);
+    }
+    
+  };
+
+  const logout = () => {
+    localStorage.removeItem("JwtToken");
+    setIsLoggedIn(false);
+    window.location.href = "/home";
+  };
+
   return (
     <header className="Header">
       <div className={"myLogo"}></div>
@@ -37,15 +51,24 @@ export default function Header() {
         classNames="NavAnimation"
         unmountOnExit
       >
-        <nav className="Nav">
-          <a href="/home">Home</a>
-          <a href="/list-games">Add new Game</a>
-          <a href="/list-users">Add new User</a>
-          <a href="/register/register-user">Register</a>
-          <a href="/contact">Contact</a>
-          <button>Login</button>
-          <button>Logout</button>
-        </nav>
+        {!isLoggedin ? (
+          <nav className="Nav">
+            <a href="/home">Home</a>
+            <a href="/register/register-user">Register</a>
+            <a href="/login">Login</a>
+            <a href="/contact">Contact</a>
+          </nav>
+        ) : (
+          <nav className="Nav">
+            <a href="/home">Home</a>
+            <a href="/list-games">Add new Game</a>
+            <a href="/list-users">Add new User</a>
+            <button onClick={logout} href="/home">
+              Logout
+            </button>
+            <a href="/contact">Contact</a>
+          </nav>
+        )}
       </CSSTransition>
       <button onClick={toggleNav} className="Burger">
         🍔

@@ -12,6 +12,7 @@ import ListUsers from "./components/usersTable/ListUsers";
 import Contact from "./components/contact/Contact";
 import RegisterUser from "./components/registerUser/RegisterUser";
 import ViewUserDetails from "./components/ViewUserDetails/ViewUserDetails";
+import LoginUser from "./components/loginUser/LoginUser";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <div className={"container head"}>
           <Header />
           <div className="container games">
-            <Route path="/Home" exact component={DisplayGameThumbnail} />
+            <Route path="/home" exact component={DisplayGameThumbnail} />
             <Route path="/list-games" component={ListProducts} />
             <Route path="/list-users" component={ListUsers} />
             <Route path="/add-game/:id" component={AddGame} />
@@ -28,6 +29,7 @@ function App() {
             <Route path="/view-user/:id" component={ViewUserDetails} />
             <Route path="/contact" component={Contact} />
             <Route path="/register/:id" component={RegisterUser} />
+            <Route path="/login" component={LoginUser} />
           </div>
           <Footer />
         </div>

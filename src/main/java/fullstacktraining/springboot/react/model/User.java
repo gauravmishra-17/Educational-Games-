@@ -30,26 +30,26 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    //@NotNull
+    @NotNull
     @NotEmpty(message = "Firstname cannot be empty")
     @Schema(description = "Name of website's user", example = "Eduard", required = true)
     private String firstname;
 
     @Column(nullable = false)
-   // @NotNull
+    @NotNull
     @NotEmpty(message = "Lastname cannot be empty")
     @Schema(description = "Lastname of website's user", example = "Eduard", required = true)
     private String lastname;
 
 
     @Column(nullable = false)
-   // @NotNull
+    @NotNull
     @NotEmpty(message = "Username cannot be empty")
     @Schema(description = "Customized description of username", example = "eduard@someone.com", required = true)
     private String username;
 
     @Column(nullable = false)
-   // @NotNull
+    @NotNull
     @NotEmpty(message = "Password cannot be empty")
     @Schema(description = "Password of a user to have access to books", example = "myPassword", required = true)
     private String password;
@@ -59,5 +59,14 @@ public class User {
     @Schema(description = "Role the user has to access the games platform", example = "Admin or User", required = true)
     private Role role;
 
+    @Column(nullable = false)
+    @NotNull
+    @Schema(description = "Whether user is admin or not", required = true)
+    private Boolean isAdmin = false;
+
+    @Column
+    @NotNull
+    @Schema(description = "Whether user is active or not")
+    private Boolean isActive= true;
 
 }

@@ -1,0 +1,39 @@
+.row{
+    /*margin-left: 0;*/
+    /*width: 100%;*/
+}
+.h3{
+    background-color: #2b2b2b;
+}
+.card{
+    background-color: #2b3e50;
+}
+
+.displayRegisterForm{
+    margin-top: 5%;
+}
+.addForm{
+    /*margin-left: 5%;*/
+    /*margin-bottom: 5%;*/
+}
+.field{
+    font-family:  "Apple Color Emoji", "Font Awesome\ 5 Free", "serif";
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: normal;
+    color: #f8f8f8;
+    margin-left: 10%;
+}
+.title{
+    font-family:  "Apple Color Emoji", "Font Awesome\ 5 Free", "serif";
+    font-size: 4rem;
+    font-weight: normal;
+    font-style: normal;
+    color: #f8f8f8;
+}
+.bt{
+    margin-left: 10%;
+}
+
+
+

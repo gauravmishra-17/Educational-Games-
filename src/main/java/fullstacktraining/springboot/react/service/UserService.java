@@ -1,7 +1,6 @@
 package fullstacktraining.springboot.react.service;
 
 import fullstacktraining.springboot.react.exception.BadRequestException;
-import fullstacktraining.springboot.react.model.Game;
 import fullstacktraining.springboot.react.model.MyUserDetails;
 import fullstacktraining.springboot.react.model.User;
 import fullstacktraining.springboot.react.repository.UserRepository;
@@ -11,13 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.ArrayList;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Service
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     @Autowired
@@ -29,12 +27,13 @@ public class UserService implements UserDetailsService {
         return new MyUserDetails(savedUser);
     }
 
-    public User findUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public User save(User user) {
         return userRepository.save(user);
+
     }
 
 
@@ -56,4 +55,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public User findUserByEmail(@Email(message = "Please enter a valid e-mail address") String email) {
+        return userRepository.findByEmail(email);
+    }
 }
