@@ -12,6 +12,7 @@ class LoginUser extends Component {
       password: "",
       passwordErr: "",
       jwtMessage: "",
+      isAdmin:"false",
     };
     this.changeUserNameHandler = this.changeUserNameHandler.bind(this);
     this.changePasswordHandler = this.changePasswordHandler.bind(this);
@@ -29,10 +30,17 @@ class LoginUser extends Component {
       console.log(res.data.message);
       if (res.status === 200 )
         {localStorage.setItem("JwtToken", res.data.jwtToken);
+        localStorage.setItem("message" , res.data.message)
+        // isAdmin=res.data.message;
+        // if(isAdmin === "true")
+        // this.setState({isAdmin:"true" })
+        // else
+        // this.setState({isAdmin:"false" })
+        
         window.location.href = "/home";}
       else
         this.setState({
-          jwtMessage: res.data.message,
+          jwtMessage: "Username already exists",
         });
     });
   };

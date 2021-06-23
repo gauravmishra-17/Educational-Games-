@@ -2,20 +2,22 @@ import React, { useState, useEffect, Component } from "react";
 import "./header.css";
 import { CSSTransition } from "react-transition-group";
 
-export default function Header({ history, location }) {
+export default function Header({ history, location,props }) {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isLoggedin, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 700px)");
     mediaQuery.addListener(handleMediaQueryChange);
     handleMediaQueryChange(mediaQuery);
     authCheck();
+    isAdminCheck();
     return () => {
       mediaQuery.removeListener(handleMediaQueryChange);
     };
-  }, [isLoggedin]);
+  }, [isLoggedin,isAdmin]);
 
   const handleMediaQueryChange = (mediaQuery) => {
     if (mediaQuery.matches) {
@@ -35,6 +37,14 @@ export default function Header({ history, location }) {
     }
     
   };
+  const isAdminCheck=() =>
+  {
+   if (this.props.isAdmin === "true")
+   setIsAdmin(true);
+   else
+   setIsAdmin(false);
+
+  }
 
   const logout = () => {
     localStorage.removeItem("JwtToken");
@@ -59,6 +69,8 @@ export default function Header({ history, location }) {
             <a href="/contact">Contact</a>
           </nav>
         ) : (
+
+
           <nav className="Nav">
             <a href="/home">Home</a>
             <a href="/list-games">Add new Game</a>
@@ -68,6 +80,8 @@ export default function Header({ history, location }) {
             </button>
             <a href="/contact">Contact</a>
           </nav>
+
+
         )}
       </CSSTransition>
       <button onClick={toggleNav} className="Burger">

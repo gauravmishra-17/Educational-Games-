@@ -43,7 +43,7 @@ public class GameController {
     }
 
     @Operation(summary = "Find game by id")
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "/admin/{id}")
     public ResponseEntity<Game> findById(@PathVariable long id) {
         return ResponseEntity.ok(gameService.findByIdOrThrowBadRequestException(id));
     }

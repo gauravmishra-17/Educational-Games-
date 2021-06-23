@@ -18,13 +18,14 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Import(SecurityConfig.class)
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -35,15 +36,19 @@ public class UserController {
     private AuthenticationManager authenticationManager;
     @Autowired
     JwtUtil jwtUtil;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @PostMapping(path = "/register")
     public ResponseEntity<?> save(@RequestBody @Valid User user) {
         User userByUsername = userService.findUserByUsername(user.getUsername());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userByEmail = userService.findUserByEmail(user.getEmail());
         if (userByUsername != null || userByEmail != null) {
             Message message = new Message();
             message.setMsg("username already exists");
-            return ResponseEntity.ok(message);
+            return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
         } else
             return ResponseEntity.ok(userService.save(user));
 
@@ -57,25 +62,27 @@ public class UserController {
                             new UsernamePasswordAuthenticationToken(
                                     authenticationRequest.getUsername(),
                                     authenticationRequest.getPassword()));
-        }  catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUsername());
-
         String jwtToken = jwtUtil.generateToken(userDetails);
-        String message = "Jwt generated";
+        String message;
+        if (userService.findUserByUsername(authenticationRequest.getUsername()).getIsAdmin())
+            message = "true";
+        else message = "false";
         return ResponseEntity.ok(new AuthenticationResponse(jwtToken, message));
     }
 
 
     @Operation(summary = "List all games unsorted")
-    @GetMapping(path = "/all")
-    public ResponseEntity<List<User>> listAll() {
+    @GetMapping(path = "/admin/all")
+    public ResponseEntity<List<User>> listAll(@RequestHeader("Authorization") String bearerToken) {
         return ResponseEntity.ok(userService.listAllNonPageable());
     }
 
     @PutMapping(path = "/admin/{id}")
-    public ResponseEntity<User> updateGame(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<User> updateGame(@RequestHeader("Authorization") String bearerToken, @PathVariable Long id, @RequestBody User user) {
 
         User updatedUser = userService.findByIdOrThrowBadRequestException(id);
         updatedUser.setEmail(user.getEmail());
@@ -94,14 +101,14 @@ public class UserController {
             @ApiResponse(responseCode = "204", description = "resource deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Not found")
     })
-    public ResponseEntity<Void> delete(@PathVariable long id) {
+    public ResponseEntity<Void> delete(@RequestHeader("Authorization") String bearerToken, @PathVariable long id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Operation(summary = "Find game by id")
     @GetMapping(path = "{id}")
-    public ResponseEntity<User> findById(@PathVariable long id) {
+    public ResponseEntity<User> findById(@RequestHeader("Authorization") String bearerToken, @PathVariable long id) {
         return ResponseEntity.ok(userService.findByIdOrThrowBadRequestException(id));
     }
 }
