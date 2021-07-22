@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { useContext } from 'react';
+import AppContext from '../AppContext';
+
 import UserService from "../services/UserService";
 import "./loginUser.css";
 
-class LoginUser extends Component {
+class LoginUser extends React.PureComponent  {
+
+  //static contextType = AppContext;
   constructor(props) {
     super(props);
 
@@ -12,13 +17,20 @@ class LoginUser extends Component {
       password: "",
       passwordErr: "",
       jwtMessage: "",
-      isAdmin:"false",
+      adminState:{},
     };
+    //this.context=useContext(AppContext);
     this.changeUserNameHandler = this.changeUserNameHandler.bind(this);
     this.changePasswordHandler = this.changePasswordHandler.bind(this);
     this.LoginUser = this.LoginUser.bind(this);
     this.cancel = this.cancel.bind(this);
   }
+  componentDidMount(){
+    const value = this.context;
+    this.setState({adminState: value});
+    console.log(value);
+   
+}
 
   LoginUser = (e) => {
     e.preventDefault();
@@ -30,13 +42,14 @@ class LoginUser extends Component {
       console.log(res.data.message);
       if (res.status === 200 )
         {localStorage.setItem("JwtToken", res.data.jwtToken);
-        localStorage.setItem("message" , res.data.message)
-        // isAdmin=res.data.message;
-        // if(isAdmin === "true")
-        // this.setState({isAdmin:"true" })
-        // else
-        // this.setState({isAdmin:"false" })
-        
+        const s = res.data.message;
+        console.log("llll");
+        console.log(this.state.adminState);
+        console.log(this.context);
+       if(s === 'true')
+        {this.context.setAdminTrue();}
+        else
+        {this.context.setAdminFalse();}
         window.location.href = "/home";}
       else
         this.setState({
@@ -83,7 +96,7 @@ class LoginUser extends Component {
   }
 
   render() {
-    const { username, usernameErr, password, passwordErr, jwtMessage } =
+    const { username, usernameErr, password, passwordErr, jwtMessage} =
       this.state;
     return (
       <div>
@@ -138,5 +151,6 @@ class LoginUser extends Component {
     );
   }
 }
+LoginUser.contextType = AppContext;
 
 export default LoginUser;

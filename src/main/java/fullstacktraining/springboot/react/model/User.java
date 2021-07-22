@@ -60,13 +60,15 @@ public class User {
     private Role role;
 
     @Column(nullable = false)
-    @NotNull
+   // @NotNull
+    //@NotEmpty
     @Schema(description = "Whether user is admin or not", required = true)
     private Boolean isAdmin = false;
 
     @Column
-    @NotNull
-    @Schema(description = "Whether user is active or not")
+   // @NotNull
+   // @NotEmpty
+    @Schema(description = "Whether user is active or not",required = true)
     private Boolean isActive= true;
 
 }

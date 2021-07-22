@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
+import { useContext } from 'react';
+import AppContext from "../AppContext";
 import "./header.css";
 import { CSSTransition } from "react-transition-group";
 
@@ -7,6 +9,7 @@ export default function Header({ history, location,props }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isLoggedin, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const myContext = useContext(AppContext);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 700px)");
@@ -39,7 +42,7 @@ export default function Header({ history, location,props }) {
   };
   const isAdminCheck=() =>
   {
-   if (this.props.isAdmin === "true")
+   if (myContext.isAdminValue === true)
    setIsAdmin(true);
    else
    setIsAdmin(false);
@@ -68,21 +71,43 @@ export default function Header({ history, location,props }) {
             <a href="/login">Login</a>
             <a href="/contact">Contact</a>
           </nav>
-        ) : (
-
-
-          <nav className="Nav">
+        ) : 
+        
+(
+  isAdmin ? 
+  (
+  <nav className="Nav">
+  <a href="/home">Home</a>
+  <a href="/list-games">Add new Game</a>
+  <a href="/list-users">Add new User</a>
+  <button onClick={logout} href="/home">
+    Logout
+  </button>
+  <a href="/contact">Contact</a>
+</nav>
+):
+(
+<nav className="Nav">
             <a href="/home">Home</a>
-            <a href="/list-games">Add new Game</a>
-            <a href="/list-users">Add new User</a>
             <button onClick={logout} href="/home">
               Logout
             </button>
             <a href="/contact">Contact</a>
           </nav>
+          )
+)
 
 
-        )}
+
+        
+       
+
+
+
+
+        
+        
+        }
       </CSSTransition>
       <button onClick={toggleNav} className="Burger">
         🍔

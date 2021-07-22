@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
+import AppContext from "./components/AppContext";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ViewGameDetails from "./components/ViewGameDetails/ViewGameDetails";
@@ -15,7 +16,26 @@ import ViewUserDetails from "./components/ViewUserDetails/ViewUserDetails";
 import LoginUser from "./components/loginUser/LoginUser";
 
 function App() {
+  
+  const [isAdmin, setIsAdmin] = useState(false);
+  const setAdminFalse =() =>
+  {
+    setIsAdmin(false);
+  }
+  const setAdminTrue =() =>
+  {
+    setIsAdmin(true);
+  }
+  const adminSettings = {
+    isAdminValue: isAdmin,
+    setIsAdmin,
+    setAdminFalse,
+    setAdminTrue,
+  };
+
+  
   return (
+    <AppContext.Provider value={adminSettings}>
     <div>
       <Router>
         <div className={"container head"}>
@@ -35,6 +55,7 @@ function App() {
         </div>
       </Router>
     </div>
+    </AppContext.Provider>
   );
 }
 
